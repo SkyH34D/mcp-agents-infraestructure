@@ -90,7 +90,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-Visita [http://localhost:8000/docs](http://localhost:8000/docs) para probar la API interactiva.
+<!-- Visita [http://localhost:8000/docs](http://localhost:8000/docs) para probar la API interactiva. -->
 
 ---
 
