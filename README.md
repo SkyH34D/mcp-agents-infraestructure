@@ -64,6 +64,13 @@ A lo largo de varias fases, se diseñarán, construirán y escalarán sistemas m
 
 ---
 
+## 🎯 ¿Para qué sirve?
+
+- Desarrollar habilidades en arquitectura de agentes y servidores MCP
+- Comprender cómo delegar tareas a agentes especializados
+- Crear una base sólida para construir agentes más complejos, con memoria, herramientas externas o comunicación A2A
+
+
 ## 📚 ¿Quién debería usar este repositorio?
 
 Este proyecto está diseñado para:
