@@ -38,6 +38,20 @@ A lo largo de varias fases, se diseñarán, construirán y escalarán sistemas m
 - Comunicación básica entre agentes (A2A)
 - Integración con APIs externas
 
+### [`fase3_mcp_avanzado/`](./fase3_mcp_avanzado/)
+- Contenerización de agentes y MCP con Docker
+- Planificación dinámica y gestión de estados con LangGraph
+- Implementación de memoria persistente (Redis o vector stores como ChromaDB)
+- Sistema de eventos para activar agentes de forma condicional
+- Inicio de razonamiento adaptativo y autosupervisión de agentes
+
+### [`fase4_multiagente_aplicado/`](./fase4_multiagente_aplicado/)
+- Caso práctico de infraestructura multiagente aplicada a una tarea real (ej. investigación, redacción de informes o planificación automatizada)
+- Colaboración entre agentes con delegación inteligente de tareas
+- Orquestación completa por el MCP con trazabilidad de decisiones
+- Integración de canales de entrega final (email, PDF, dashboards)
+- Monitorización y control del sistema en tiempo real
+
 ---
 
 ## 🛠️ Requisitos técnicos
