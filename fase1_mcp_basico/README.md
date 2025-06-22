@@ -1,35 +1,76 @@
-# Infraestructura MCP - PoC (Prueba de Concepto)
+# Fase 1 – MCP Básico con Cliente Explícito
 
-Este repositorio contiene una prueba de concepto (PoC) para una arquitectura MCP (Multi-agent Control Plane) básica,
-orientada a visualizar cómo se orquestan agentes de IA usando Python y FastAPI.
+Este directorio contiene la **Prueba de Concepto (PoC)** de la **Fase 1** de la Infraestructura MCP. Aquí aprenderás a montar un servidor MCP mínimo con FastAPI y dos agentes simples, usando un cliente explícito de OpenAI.
 
-## Componentes
+---
 
-- **Agente Responder**: Usa un modelo LLM (como GPT-4) para responder preguntas.
-- **Agente Transformer**: Transforma el texto (por ejemplo, invierte el contenido).
-- **Servidor MCP (FastAPI)**: Punto central que recibe tareas, selecciona el agente y guarda resultados.
-- **Base de Datos (SQLite)**: Guarda los logs de las tareas procesadas.
+## 📁 Estructura del directorio
 
-## Requisitos
-
-```bash
-pip install fastapi uvicorn openai pydantic sqlalchemy
-```
-
-## Uso
-
-1. Ejecuta `uvicorn main:app --reload`
-2. Accede a `http://localhost:8000/docs` para probar los endpoints
-
-## Ejemplo de solicitud
-
-```json
-POST /run-task
-{
-  "agent": "responder",
-  "input": "¿Qué es un agente en IA?"
-}
+```plaintext
+fase1_mcp_basico/
+├── main.py               # Servidor MCP (FastAPI)
+├── agents/
+│   ├── responder.py      # Agente que usa cliente explícito de OpenAI para chat completions
+│   └── transformer.py    # Agente que aplica una transformación al texto
+├── db/
+│   └── models.py         # Definición de la tabla Task en SQLite
+├── .env                  # Variables de entorno (OPENAI_API_KEY)
+└── requirements.txt      # Dependencias del proyecto
 ```
 
 ---
-Autor: Cristian "SkyH34D" Franco
+
+## 🔎 Componentes clave
+
+- **Cliente explícito de OpenAI**: configurado en `agents/responder.py` para centralizar clave, timeout y opciones.
+- **Agente Responder**: genera respuestas con GPT-4 utilizando `client.chat.completions.create`.
+- **Agente Transformer**: invierte la cadena de texto recibida.
+- **Servidor FastAPI**: expone `/run-task`, recibe `agent` e `input`, delega al agente y guarda el resultado en SQLite.
+- **SQLite**: base de datos ligera (`tasks.db`) para registrar cada tarea (input, output, agente).
+
+---
+
+## 🛠️ Requisitos
+
+```bash
+python3 -m venv mcp-env           # (opcional pero recomendado)
+source mcp-env/bin/activate
+pip install -r requirements.txt
+```
+
+**requirements.txt**:
+
+```text
+fastapi
+uvicorn
+openai
+python-dotenv
+pydantic
+sqlalchemy
+```
+
+---
+
+## 🔐 Configurar la API Key de OpenAI
+
+1. Crea un archivo `.env` en este directorio con:
+   ```ini
+   OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   ```
+2. Añade `.env` a tu `.gitignore` para no subir tu clave.
+
+El cliente de OpenAI en `agents/responder.py` carga esta variable automáticamente con `python-dotenv`.
+
+---
+
+## ▶️ Ejecutar la PoC
+
+```bash
+uvicorn main:app --reload
+```
+
+Accede a `http://localhost:8000/docs` para probar el endpoint **POST /run-task**.
+
+---
+
+> Con esta configuración, tienes un MCP básico listo para evolucionar en las siguientes fases.
